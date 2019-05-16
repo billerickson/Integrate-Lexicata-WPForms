@@ -2,7 +2,7 @@
 
 **Contributors:** billerickson  
 **Donate link:** https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZHXHYVWJCTZ94  
-**Tags:** form, wpforms, lexicata, crm, attorney
+**Tags:** form, wpforms, lexicata, crm, attorney  
 **Requires at least:** 3.0.1  
 **Tested up to:** 5.2  
 **Stable tag:** 1.0.0  
