@@ -116,7 +116,7 @@ class Integrate_Lexicata_WPForms {
 			$instance->form_data,
 			__( 'Referring URL', 'integrate-lexicata-wpforms' ),
 			array(
-				'field_map' => array( 'text', 'url' ),
+				'field_map' => array( 'text', 'url', 'hidden' ),
                 'placeholder' => __( '-- Select Field --', 'integrate-lexicata-wpforms' ),
 			)
 		);
@@ -149,7 +149,7 @@ class Integrate_Lexicata_WPForms {
 		foreach( $lexicata_fields as $lexicata_key => $form_setting_key ) {
 			$form_field_id = $form_data['settings'][ $form_setting_key ];
 			if( !empty( $form_field_id ) && !empty( $fields[ $form_field_id ]['value'] ) )
-				$inbox_lead[ $lexica_key ] = $fields[ $form_field_key ]['value'];
+				$inbox_lead[ $lexicata_key ] = $fields[ $form_field_id ]['value'];
 		}
 
         $args = array(
