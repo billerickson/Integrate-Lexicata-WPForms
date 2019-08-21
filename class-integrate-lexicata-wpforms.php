@@ -165,7 +165,8 @@ class Integrate_Lexicata_WPForms {
             return;
 
         // Submit to Lexicata
-        $request = wp_remote_post( add_query_arg( $args, 'http://app.lexicata.com/inbox_leads' ) );
+        $url = 'http://app.lexicata.com/inbox_leads';
+        $request = wp_remote_post( $url, $args );
 
     }
 
