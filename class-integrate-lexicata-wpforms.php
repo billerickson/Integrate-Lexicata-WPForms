@@ -138,6 +138,7 @@ class Integrate_Lexicata_WPForms {
 			return;
 
 		$inbox_lead = array();
+		$included = array();
 		$lexicata_fields = array(
 			'from_first' => 'be_lexicata_field_first_name',
 			'from_last' => 'be_lexicata_field_last_name',
@@ -148,9 +149,18 @@ class Integrate_Lexicata_WPForms {
 		);
 		foreach( $lexicata_fields as $lexicata_key => $form_setting_key ) {
 			$form_field_id = $form_data['settings'][ $form_setting_key ];
-			if( !empty( $form_field_id ) && !empty( $fields[ $form_field_id ]['value'] ) )
+			if( !empty( $form_field_id ) && !empty( $fields[ $form_field_id ]['value'] ) ) {
 				$inbox_lead[ $lexicata_key ] = $fields[ $form_field_id ]['value'];
+				$included[] = $form_field_id;
+			}
 		}
+	    
+		// Add remaining fields to message
+		foreach( $fields as $field_id => $field ) {
+			if( ! in_array( $field_id, $included ) && !empty( $field['value'] ) )
+				$inbox_lead['from_message'] .= '<br />' . $field['name'] . ': ' . $field['value'];
+		}
+	    
 
         $args = array(
             'headers' => array(
@@ -159,8 +169,8 @@ class Integrate_Lexicata_WPForms {
             'body' => json_encode( array( 'auth_token' => $auth_token, 'inbox_lead' => $inbox_lead ) )
         );
 
-		// Filter for limiting integration
-		// @see https://www.billerickson.net/code/integrate-lexicata-wpforms-conditional-processing/
+	// Filter for limiting integration
+	// @see https://www.billerickson.net/code/integrate-lexicata-wpforms-conditional-processing/
         if( ! apply_filters( 'be_lexicata_process_form', true, $fields, $form_data ) )
             return;
 
